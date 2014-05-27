@@ -1,0 +1,29 @@
+{
+  "name": "bitmv",
+  "version": "1.0.0",
+  "description": "Bit matrices and vectors",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aredridel/bitmv.git"
+  },
+  "keywords": [
+    "matrix",
+    "bit",
+    "vector",
+    "transitive",
+    "closure"
+  ],
+  "author": "Aria Stewart",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aredridel/bitmv/issues"
+  },
+  "homepage": "https://github.com/aredridel/bitmv",
+  "devDependencies": {
+    "tape": "^2.13.1"
+  }
+}
