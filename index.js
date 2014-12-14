@@ -11,8 +11,17 @@ function bv_or_assign(X, Y) {
 }
 
 function makevector(str) {
-    var out = str.split(/(.{1,32})/).filter(id).map(toBinary);
-    out.bits = str.length;
+    var out;
+    if (typeof str == 'string') {
+        out = str.split(/(.{1,32})/).filter(id).map(toBinary);
+        out.bits = str.length;
+    } else {
+        out = new Array(Math.ceil(str / 32));
+        for (var i = 0; i < out.length; i++) {
+            out[i] = 0;
+        }
+        out.bits = str;
+    }
     out.mask = (1 << out.bits) - 1;
     return out;
 }
@@ -37,6 +46,8 @@ module.exports = {
     fromBinStrings: function fromBinStrings(arr) {
         return arr.map(makevector);
     },
+
+    vector: makevector,
 
     get: function (mtx, row, col) {
         return bv_bit_test(mtx[row], col);
