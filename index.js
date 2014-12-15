@@ -4,6 +4,10 @@ function bv_bit_test(vec, bit) {
     return vec[bit >>> 5] & (1 << (bit & 31));
 }
 
+function bv_bit_set(vec, bit) {
+    vec[bit >>> 5] |= (1 << (bit & 31));
+}
+
 function bv_or_assign(X, Y) {
     var size = X.length;
     while (size-- > 0) X[size] |= Y[size];
@@ -48,6 +52,12 @@ module.exports = {
     },
 
     vector: makevector,
+
+    bv_bit_set: bv_bit_set,
+
+    bv_bit_test: bv_bit_test,
+
+    bv_or_assign: bv_or_assign,
 
     get: function (mtx, row, col) {
         return bv_bit_test(mtx[row], col);
