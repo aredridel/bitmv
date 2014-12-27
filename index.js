@@ -30,6 +30,18 @@ function makevector(str) {
     return out;
 }
 
+function makematrix(rows, cols) {
+    if (Array.isArray(rows)) {
+        return rows.map(makevector);
+    } else {
+        var matrix = new Array(rows);
+        for (var i = 0; i < rows; i++) {
+            matrix[i] = makevector(cols);
+        }
+        return matrix;
+    }
+}
+
 function toBinary(str) {
     return parseInt(str, 2);
 }
@@ -47,9 +59,9 @@ module.exports = {
         }).join("\n");
     },
 
-    fromBinStrings: function fromBinStrings(arr) {
-        return arr.map(makevector);
-    },
+    fromBinStrings: makematrix,
+
+    matrix: makematrix,
 
     vector: makevector,
 
