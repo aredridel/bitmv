@@ -14,6 +14,12 @@ function bv_or_assign(X, Y) {
     X[X.length - 1] &= X.mask;
 }
 
+function bv_and_assign(X, Y) {
+    var size = X.length;
+    while (size-- > 0) X[size] &= Y[size];
+    X[X.length - 1] &= X.mask;
+}
+
 function makevector(str) {
     var out;
     if (typeof str == 'string') {
@@ -78,6 +84,8 @@ module.exports = {
     bv_bit_test: bv_bit_test,
 
     bv_or_assign: bv_or_assign,
+
+    bv_and_assign: bv_and_assign,
 
     get: function (mtx, row, col) {
         return bv_bit_test(mtx[row], col);
