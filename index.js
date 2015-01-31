@@ -59,6 +59,14 @@ module.exports = {
         }).join("\n");
     },
 
+    dumpv: function dumpv(v) {
+        var out = [];
+        for (var i = 0; i < v.bits; i++) {
+            if (bv_bit_test(v, i)) out.push(i);
+        }
+        return out;
+    },
+
     fromBinStrings: makematrix,
 
     matrix: makematrix,
