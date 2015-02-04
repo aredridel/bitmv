@@ -48,6 +48,16 @@ function makematrix(rows, cols) {
     }
 }
 
+function transpose(matrix) {
+    var out = makematrix(matrix[0].bits, matrix.length);
+    for (var row in matrix) {
+        for (var col = 0; col < matrix[row].bits; col++) {
+            if (bv_bit_test(matrix[row], col)) bv_bit_set(out[col], row);
+        }
+    }
+    return out;
+}
+
 function toBinary(str) {
     return parseInt(str, 2);
 }
@@ -86,6 +96,8 @@ module.exports = {
     bv_or_assign: bv_or_assign,
 
     bv_and_assign: bv_and_assign,
+
+    transpose: transpose,
 
     get: function (mtx, row, col) {
         return bv_bit_test(mtx[row], col);
