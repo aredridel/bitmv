@@ -25,5 +25,8 @@
   "homepage": "https://github.com/aredridel/bitmv",
   "devDependencies": {
     "tape": "^2.13.1"
+  },
+  "dependencies": {
+    "bn": "^1.0.1"
   }
 }

@@ -1,39 +1,25 @@
 "use strict";
 
+var BigInteger = require('bn').BigInteger;
+
 function bv_bit_test(vec, bit) {
-    return vec[bit >>> 5] & (1 << (bit & 31));
+    return vec.testBit(bit);
 }
 
 function bv_bit_set(vec, bit) {
-    vec[bit >>> 5] |= (1 << (bit & 31));
+    return vec.setBit(bit);
 }
 
-function bv_or_assign(X, Y) {
-    var size = X.length;
-    while (size-- > 0) X[size] |= Y[size];
-    X[X.length - 1] &= X.mask;
+function bv_or(X, Y) {
+    return X.or(Y);
 }
 
-function bv_and_assign(X, Y) {
-    var size = X.length;
-    while (size-- > 0) X[size] &= Y[size];
-    X[X.length - 1] &= X.mask;
+function bv_and(X, Y) {
+    return X.and(Y);
 }
 
 function makevector(str) {
-    var out;
-    if (typeof str == 'string') {
-        out = str.split(/(.{1,32})/).filter(id).map(toBinary);
-        out.bits = str.length;
-    } else {
-        out = new Array(Math.ceil(str / 32));
-        for (var i = 0; i < out.length; i++) {
-            out[i] = 0;
-        }
-        out.bits = str;
-    }
-    out.mask = (1 << out.bits) - 1;
-    return out;
+    return new BigInteger(str);
 }
 
 function makematrix(rows, cols) {
@@ -52,7 +38,7 @@ function transpose(matrix) {
     var out = makematrix(matrix[0].bits, matrix.length);
     for (var row in matrix) {
         for (var col = 0; col < matrix[row].bits; col++) {
-            if (bv_bit_test(matrix[row], col)) bv_bit_set(out[col], row);
+            if (bv_bit_test(matrix[row], col)) out[col] = bv_bit_set(out[col], row);
         }
     }
     return out;
@@ -93,9 +79,9 @@ module.exports = {
 
     bv_bit_test: bv_bit_test,
 
-    bv_or_assign: bv_or_assign,
+    bv_or: bv_or,
 
-    bv_and_assign: bv_and_assign,
+    bv_and: bv_and,
 
     transpose: transpose,
 
@@ -110,9 +96,8 @@ module.exports = {
             var outer_row_v = matrix[outer_row];
             var column;
             for (column = 0; column < size; column++) {
-                var inner_row_v = matrix[column];
-                if (bv_bit_test(inner_row_v, outer_row)) {
-                    bv_or_assign(inner_row_v, outer_row_v);
+                if (bv_bit_test(matrix[column], outer_row)) {
+                    matrix[column] = bv_or(matrix[column], outer_row_v);
                 }
             }
         }
