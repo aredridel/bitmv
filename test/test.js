@@ -1,5 +1,5 @@
 var test = require('tape');
-var BigInteger = require('bn').BigInteger;
+var BigInteger = require('bn.js');
 var bitmv = require('../index.js');
 
 test('transitive_closure', function (t) {

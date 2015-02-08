@@ -1,21 +1,21 @@
 "use strict";
 
-var BigInteger = require('bn').BigInteger;
+var BigInteger = require('bn.js');
 
 function bv_bit_test(vec, bit) {
-    return vec.testBit(bit);
+    return vec.testn(bit);
 }
 
 function bv_bit_set(vec, bit) {
-    return vec.setBit(bit);
+    return vec.setn(bit, true);
 }
 
-function bv_or(X, Y) {
-    return X.or(Y);
+function bv_or_assign(X, Y) {
+    return X.ior(Y);
 }
 
-function bv_and(X, Y) {
-    return X.and(Y);
+function bv_and_assign(X, Y) {
+    return X.iand(Y);
 }
 
 function makevector(str) {
@@ -38,7 +38,7 @@ function transpose(matrix) {
     var out = makematrix(matrix[0].bits, matrix.length);
     for (var row in matrix) {
         for (var col = 0; col < matrix[row].bits; col++) {
-            if (bv_bit_test(matrix[row], col)) out[col] = bv_bit_set(out[col], row);
+            if (bv_bit_test(matrix[row], col)) bv_bit_set(out[col], row);
         }
     }
     return out;
@@ -79,9 +79,9 @@ module.exports = {
 
     bv_bit_test: bv_bit_test,
 
-    bv_or: bv_or,
+    bv_or_assign: bv_or_assign,
 
-    bv_and: bv_and,
+    bv_and_assign: bv_and_assign,
 
     transpose: transpose,
 
@@ -97,7 +97,7 @@ module.exports = {
             var column;
             for (column = 0; column < size; column++) {
                 if (bv_bit_test(matrix[column], outer_row)) {
-                    matrix[column] = bv_or(matrix[column], outer_row_v);
+                    bv_or_assign(matrix[column], outer_row_v);
                 }
             }
         }

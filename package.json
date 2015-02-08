@@ -27,6 +27,6 @@
     "tape": "^2.13.1"
   },
   "dependencies": {
-    "bn": "^1.0.1"
+    "bn.js": "git://github.com/aredridel/bn.js#add-bitops"
   }
 }
