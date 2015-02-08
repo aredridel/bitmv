@@ -10,13 +10,13 @@ function bv_bit_set(vec, bit) {
 
 function bv_or_assign(X, Y) {
     var size = X.length;
-    while (size-- > 0) X[size] |= Y[size];
+    while (size-- >= 0) X[size] |= Y[size];
     X[X.length - 1] &= X.mask;
 }
 
 function bv_and_assign(X, Y) {
     var size = X.length;
-    while (size-- > 0) X[size] &= Y[size];
+    while (size-- >= 0) X[size] &= Y[size];
     X[X.length - 1] &= X.mask;
 }
 
