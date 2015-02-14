@@ -1,10 +1,12 @@
 "use strict";
 
 function bv_bit_test(vec, bit) {
+    if (bit == null) return;
     return vec[bit >>> 5] & (1 << (bit & 31));
 }
 
 function bv_bit_set(vec, bit) {
+    if (bit == null) return;
     vec[bit >>> 5] |= (1 << (bit & 31));
 }
 
