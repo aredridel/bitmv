@@ -66,18 +66,22 @@ function toBinary(str) {
 
 function id (e) { return e; }
 
+function dumpv(e) {
+    return e.map(function(l) {
+        var s = l.toString(2);
+        while (s.length < e.bits) s = '0' + s;
+        return s;
+    }).join('x');
+}
+
 module.exports = {
     dump: function dump(m) {
-        return m.map(function (e) {
-            return e.map(function(l) {
-                var s = l.toString(2);
-                while (s.length < m.length) s = '0' + s;
-                return s;
-            }).join('x');
-        }).join("\n");
+        return m.map(dumpv).join('\n');
     },
 
-    dumpv: function dumpv(v) {
+    dumpv: dumpv,
+
+    dumpvn: function dumpvn(v) {
         var out = [];
         for (var i = 0; i < v.bits; i++) {
             if (bv_bit_test(v, i)) out.push(i);
