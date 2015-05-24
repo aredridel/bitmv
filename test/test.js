@@ -33,3 +33,34 @@ test('vector from string', function (t) {
     t.equal(vec[1], 1);
     t.end();
 });
+
+test('bv_or', function (t) {
+    var x = bitmv.vector('10');
+    var y = bitmv.vector('01');
+    var vec = bitmv.bv_or(x, y);
+    t.equal(vec.bits, 2);
+    t.ok(bitmv.bv_bit_test(vec, 0));
+    t.ok(bitmv.bv_bit_test(vec, 1));
+    t.notOk(bitmv.bv_bit_test(x, 0));
+    t.ok(bitmv.bv_bit_test(x, 1));
+    t.ok(bitmv.bv_bit_test(y, 0));
+    t.notOk(bitmv.bv_bit_test(y, 1));
+    t.end();
+});
+
+test('bv_and', function (t) {
+    var x = bitmv.vector('101');
+    var y = bitmv.vector('011');
+    var vec = bitmv.bv_and(x, y);
+    t.equal(vec.bits, 3);
+    t.ok(bitmv.bv_bit_test(vec, 0));
+    t.notOk(bitmv.bv_bit_test(vec, 1));
+    t.notOk(bitmv.bv_bit_test(vec, 2));
+    t.ok(bitmv.bv_bit_test(x, 0));
+    t.notOk(bitmv.bv_bit_test(x, 1));
+    t.ok(bitmv.bv_bit_test(x, 2));
+    t.ok(bitmv.bv_bit_test(y, 0));
+    t.ok(bitmv.bv_bit_test(y, 1));
+    t.notOk(bitmv.bv_bit_test(y, 2));
+    t.end();
+});

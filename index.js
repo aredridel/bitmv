@@ -16,10 +16,24 @@ function bv_or_assign(X, Y) {
     X[X.length - 1] &= X.mask;
 }
 
+function bv_or(X, Y) {
+    var vec = makevector(X.bits);
+    bv_or_assign(vec, X);
+    bv_or_assign(vec, Y);
+    return vec;
+}
+
 function bv_and_assign(X, Y) {
     var size = X.length;
     while (size-- > 0) X[size] &= Y[size];
     X[X.length - 1] &= X.mask;
+}
+
+function bv_and(X, Y) {
+    var vec = makevector(X.bits);
+    bv_or_assign(vec, X);
+    bv_and_assign(vec, Y);
+    return vec;
 }
 
 function makevector(str) {
@@ -101,7 +115,11 @@ module.exports = {
 
     bv_or_assign: bv_or_assign,
 
+    bv_or: bv_or,
+
     bv_and_assign: bv_and_assign,
+
+    bv_and: bv_and,
 
     transpose: transpose,
 
