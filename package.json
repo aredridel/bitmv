@@ -4,7 +4,7 @@
   "description": "Bit matrices and vectors",
   "main": "index.js",
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "tap test/*.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/aredridel/bitmv",
   "devDependencies": {
-    "tape": "^2.13.1"
+    "tap": "^1.1.0"
   }
 }

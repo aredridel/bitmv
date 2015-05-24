@@ -1,4 +1,4 @@
-var test = require('tape');
+var test = require('tap').test;
 var bitmv = require('../index.js');
 
 test('transitive_closure', function (t) {
