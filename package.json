@@ -17,7 +17,7 @@
     "transitive",
     "closure"
   ],
-  "author": "Aria Stewart",
+  "author": "Aria Stewart <aredridel@dinhe.net>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aredridel/bitmv/issues"
