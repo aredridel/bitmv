@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/aredridel/bitmv",
   "devDependencies": {
-    "tap": "^5.7.1"
+    "tap": "^6.0.0"
   }
 }
